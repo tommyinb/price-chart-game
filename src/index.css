@@ -13,6 +13,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (orientation: landscape) {
+  body {
+    font-size: 3vw;
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+    font-size: 3vh;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

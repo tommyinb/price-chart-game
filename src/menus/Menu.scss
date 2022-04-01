@@ -1,0 +1,27 @@
+.menus-Menu {
+  width: 100vw;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    color: #fff;
+  }
+
+  .item {
+    min-width: 50%;
+    text-align: center;
+    text-decoration: none;
+    color: #f24f09;
+
+    @media (orientation: landscape) {
+      padding: 0.5em;
+    }
+
+    @media (orientation: portrait) {
+      padding: 1em;
+    }
+  }
+}

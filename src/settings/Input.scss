@@ -1,0 +1,14 @@
+.settings-Input {
+  display: flex;
+
+  .minus,
+  .plus {
+    color: #731c13;
+  }
+
+  .value {
+    min-width: 3em;
+    color: #f24f09;
+    text-align: center;
+  }
+}

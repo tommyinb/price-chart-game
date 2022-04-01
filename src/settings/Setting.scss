@@ -1,0 +1,42 @@
+.settings-Setting {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      color: #fff;
+    }
+
+    .label {
+      margin-bottom: 0.3em;
+      color: #183040;
+
+      @media (orientation: landscape) {
+        margin-top: 0.5em;
+      }
+
+      @media (orientation: portrait) {
+        margin-top: 1.5em;
+      }
+    }
+  }
+
+  .save {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #183040;
+    text-align: center;
+    color: #fff;
+
+    &:active {
+      color: #888;
+    }
+  }
+}

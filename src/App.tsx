@@ -1,14 +1,17 @@
-import { Chart } from "./charts/Chart";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Menu } from "./menus/Menu";
+import { Quiz } from "./quizzes/Quiz";
+import { Setting } from "./settings/Setting";
 
 function App() {
   return (
-    <Chart
-      points={[
-        { x: 100, y: 100 },
-        { x: 200, y: 100 },
-        { x: 300, y: 100 },
-      ]}
-    />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Menu />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/setting" element={<Setting />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
