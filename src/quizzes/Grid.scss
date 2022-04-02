@@ -1,0 +1,47 @@
+.quizzes-Grid {
+  display: flex;
+  flex-direction: column;
+
+  .high,
+  .middle,
+  .low {
+    display: flex;
+
+    .right {
+      border-left: 2px dashed #18304044;
+    }
+  }
+
+  .high,
+  .low {
+    .right {
+      &.correct {
+        background-color: #3caea388;
+      }
+
+      &.incorrect {
+        background-color: #ed553b88;
+      }
+    }
+  }
+
+  .high {
+    border-bottom: 2px dotted #18304044;
+  }
+
+  .middle {
+    .right {
+      &.correct {
+        background-color: #3caea322;
+      }
+
+      &.incorrect {
+        background-color: #ed553bcc;
+      }
+    }
+  }
+
+  .low {
+    border-top: 2px dotted #18304044;
+  }
+}

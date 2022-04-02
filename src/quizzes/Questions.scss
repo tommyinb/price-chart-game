@@ -1,0 +1,42 @@
+.quizzes-Questions {
+  width: 100vw;
+  height: 100vh;
+
+  .controls,
+  .quizzes-Question {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .controls {
+    left: 0;
+    width: 3em;
+    background-color: #00000088;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .zoom,
+    .trash,
+    .next {
+      padding: 0.5em;
+
+      svg {
+        width: 2em;
+        height: 2em;
+      }
+    }
+
+    .zoom {
+      &:not(.active) {
+        opacity: 0.1;
+      }
+    }
+  }
+
+  .quizzes-Question {
+    left: 3em;
+    width: calc(100vw - 3em);
+  }
+}

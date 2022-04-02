@@ -1,5 +1,4 @@
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
-import "./Chart.scss";
 import { ChartContext } from "./ChartContext";
 
 export function Chart({ children }: { children: ReactNode }) {

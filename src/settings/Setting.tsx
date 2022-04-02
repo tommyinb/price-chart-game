@@ -6,18 +6,18 @@ import { useSetting } from "./useSetting";
 
 export function Setting() {
   const {
-    fromDays: settingFromDays,
-    setFromDays: setSettingFromDays,
+    fromHours: settingFromHours,
+    setFromHours: setSettingFromHours,
 
-    toDays: settingToDays,
-    setToDays: setSettingToDays,
+    toHours: settingToHours,
+    setToHours: setSettingToHours,
 
     questions: settingQuestions,
     setQuestions: setSettingQuestions,
   } = useSetting();
 
-  const [displayFromDays, setDisplayFromDays] = useState(settingFromDays);
-  const [displayToDays, setDisplayToDays] = useState(settingToDays);
+  const [displayFromHours, setDisplayFromHours] = useState(settingFromHours);
+  const [displayToHours, setDisplayToHours] = useState(settingToHours);
 
   const [displayQuestions, setDisplayQuestions] = useState(settingQuestions);
 
@@ -28,11 +28,11 @@ export function Setting() {
       <div className="content">
         <h1>Settings</h1>
 
-        <div className="label">From Days</div>
-        <Input value={displayFromDays} setValue={setDisplayFromDays} />
+        <div className="label">From Hours</div>
+        <Input value={displayFromHours} setValue={setDisplayFromHours} />
 
-        <div className="label">To Days</div>
-        <Input value={displayToDays} setValue={setDisplayToDays} />
+        <div className="label">To Hours</div>
+        <Input value={displayToHours} setValue={setDisplayToHours} />
 
         <div className="label">Questions</div>
         <Input value={displayQuestions} setValue={setDisplayQuestions} />
@@ -41,8 +41,8 @@ export function Setting() {
       <div
         className="save"
         onClick={() => {
-          setSettingFromDays(displayFromDays);
-          setSettingToDays(displayToDays);
+          setSettingFromHours(displayFromHours);
+          setSettingToHours(displayToHours);
           setSettingQuestions(displayQuestions);
 
           navigate("/");

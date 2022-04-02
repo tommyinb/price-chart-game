@@ -1,31 +1,28 @@
-import { useLayoutEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useSetting } from "../settings/useSetting";
+import { useLockOrientation } from "../utilities/useLockOrientation";
 import { Answer } from "./Answer";
-import { Question } from "./Question";
+import { Questions } from "./Questions";
 import { Result } from "./Result";
 
 export function Quiz() {
-  useLayoutEffect(() => {
-    window.screen.orientation.lock("landscape");
-
-    return () => {
-      window.screen.orientation.unlock();
-    };
-  }, []);
+  useLockOrientation("landscape");
 
   const { questions } = useSetting();
-  const [answers, setAnswers] = useState<Answer[]>([]);
 
-  return answers.length < questions ? (
-    <Question
-      key={answers.length}
-      setAnswer={(answer) => {
-        setAnswers([...answers, answer]);
+  const [answers, setAnswers] = useState<(Answer | undefined)[]>([]);
 
-        //TODO save answer stats
-      }}
-    />
-  ) : (
+  const [completed, setCompleted] = useState(false);
+  const complete = useCallback(() => setCompleted(true), []);
+
+  return completed ? (
     <Result />
+  ) : (
+    <Questions
+      count={questions}
+      answers={answers}
+      setAnswers={setAnswers}
+      complete={complete}
+    />
   );
 }

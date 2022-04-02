@@ -1,0 +1,9 @@
+.quizzes-Question {
+  position: relative;
+
+  .charts-Chart,
+  .quizzes-Grid {
+    position: absolute;
+    inset: 0;
+  }
+}

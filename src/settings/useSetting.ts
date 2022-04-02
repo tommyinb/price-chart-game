@@ -1,36 +1,46 @@
+import { useCallback, useMemo } from "react";
+
 export function useSetting() {
-  const fromDaysKey = "fromDays";
+  const fromHoursKey = "fromHours";
+  const { value: fromHours, setValue: setFromHours } = useValue(
+    fromHoursKey,
+    "24"
+  );
 
-  const fromDaysText = localStorage.getItem(fromDaysKey);
-  const fromDaysValue = parseInt(fromDaysText || "5");
-
-  const setFromDays = (fromDays: number) =>
-    localStorage.setItem(fromDaysKey, fromDays.toString());
-
-  const toDaysKey = "toDays";
-
-  const toDaysText = localStorage.getItem(toDaysKey);
-  const toDaysValue = parseInt(toDaysText || "5");
-
-  const setToDays = (toDays: number) =>
-    localStorage.setItem(toDaysKey, toDays.toString());
+  const toHoursKey = "toHours";
+  const { value: toHours, setValue: setToHours } = useValue(toHoursKey, "24");
 
   const questionsKey = "questions";
-
-  const questionsText = localStorage.getItem(questionsKey);
-  const questionsValue = parseInt(questionsText || "20");
-
-  const setQuestions = (questions: number) =>
-    localStorage.setItem(questionsKey, questions.toString());
+  const { value: questions, setValue: setQuestions } = useValue(
+    questionsKey,
+    "20"
+  );
 
   return {
-    fromDays: fromDaysValue,
-    setFromDays,
+    fromHours,
+    setFromHours,
 
-    toDays: toDaysValue,
-    setToDays,
+    toHours,
+    setToHours,
 
-    questions: questionsValue,
+    questions,
     setQuestions,
+  };
+}
+
+function useValue(key: string, defaultText: string) {
+  const value = useMemo(() => {
+    const text = localStorage.getItem(key);
+    return parseInt(text ?? defaultText);
+  }, [defaultText, key]);
+
+  const setValue = useCallback(
+    (value: number) => localStorage.setItem(key, value.toString()),
+    [key]
+  );
+
+  return {
+    value,
+    setValue,
   };
 }
