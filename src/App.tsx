@@ -5,7 +5,7 @@ import { Setting } from "./settings/Setting";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/price-chart-game">
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/quiz" element={<Quiz />} />

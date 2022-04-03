@@ -4,13 +4,19 @@ import { ReactComponent as Cross } from "./cross.svg";
 import { Outcome } from "./Outcome";
 import "./Result.scss";
 
-export function Result({ answers }: { answers: (Answer | undefined)[] }) {
+export function Result({
+  answers,
+  count,
+}: {
+  answers: (Answer | undefined)[];
+  count: number;
+}) {
   const answeredAnswers = answers.filter((answer) => answer);
 
   return (
     <div className="quizzes-Result">
       <h2>
-        Result {answers.filter((t) => t !== undefined).length}/{answers.length}
+        Result {answers.filter((t) => t !== undefined).length}/{count}
       </h2>
 
       <div className="table">

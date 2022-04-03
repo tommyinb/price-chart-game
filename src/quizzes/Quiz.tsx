@@ -16,7 +16,7 @@ export function Quiz() {
   const complete = useCallback(() => setCompleted(true), []);
 
   return completed ? (
-    <Result answers={answers} />
+    <Result answers={answers} count={questions} />
   ) : (
     <Questions
       count={questions}

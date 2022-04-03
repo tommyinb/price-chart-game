@@ -37,8 +37,6 @@ export function Question({
     [outcomes]
   );
 
-  console.log(expectedOutcome);
-
   useEffect(() => {
     if (selectedOutcome) {
       setAnswer({
