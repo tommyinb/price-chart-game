@@ -7,5 +7,5 @@ export interface Answer {
   toHours: number;
 
   expected: Outcome;
-  actual: Outcome;
+  answered: Outcome;
 }

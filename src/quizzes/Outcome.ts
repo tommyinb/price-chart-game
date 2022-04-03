@@ -1,5 +1,5 @@
 export enum Outcome {
-  High,
-  Middle,
-  Low,
+  High = "high",
+  Middle = "middle",
+  Low = "low",
 }

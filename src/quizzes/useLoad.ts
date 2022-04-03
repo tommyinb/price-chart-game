@@ -66,23 +66,5 @@ export function useLoad(
         : Outcome.Middle
     );
 
-  console.log(
-    "in",
-    Math.max(
-      ...fromItems.map((item) => (item.price - middlePrice) / middlePrice)
-    ),
-    Math.min(
-      ...fromItems.map((item) => (item.price - middlePrice) / middlePrice)
-    )
-  );
-
-  console.log(
-    "out",
-    Math.max(
-      ...toItems.map((item) => (item.price - middlePrice) / middlePrice)
-    ),
-    Math.min(...toItems.map((item) => (item.price - middlePrice) / middlePrice))
-  );
-
   return { fromPoints, toPoints, outcomes };
 }

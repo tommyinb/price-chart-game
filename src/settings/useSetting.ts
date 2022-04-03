@@ -13,7 +13,7 @@ export function useSetting() {
   const questionsKey = "questions";
   const { value: questions, setValue: setQuestions } = useValue(
     questionsKey,
-    "20"
+    "50"
   );
 
   return {

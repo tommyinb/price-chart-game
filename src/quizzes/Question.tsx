@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Chart } from "../charts/Chart";
 import { Line } from "../charts/Line";
 import { useSetting } from "../settings/useSetting";
@@ -30,38 +30,49 @@ export function Question({
     zoom
   );
 
-  const [outcome, setOutcome] = useState<Outcome | undefined>();
+  const [selectedOutcome, setSelectedOutcome] = useState<Outcome | undefined>();
 
-  const correct = useMemo(() => {
-    switch (outcome) {
-      case Outcome.Middle:
-        return outcomes.every((o) => o === Outcome.Middle);
+  const expectedOutcome = useMemo(
+    () => outcomes.find((o) => o !== Outcome.Middle) ?? Outcome.Middle,
+    [outcomes]
+  );
 
-      case Outcome.High:
-      case Outcome.Low:
-        const first = outcomes.find((o) => o !== Outcome.Middle);
-        return first === outcome;
+  console.log(expectedOutcome);
 
-      default:
-        return false;
+  useEffect(() => {
+    if (selectedOutcome) {
+      setAnswer({
+        date: startTime,
+        fromHours,
+        toHours,
+        expected: expectedOutcome,
+        answered: selectedOutcome,
+      });
     }
-  }, [outcome, outcomes]);
+  }, [
+    expectedOutcome,
+    fromHours,
+    selectedOutcome,
+    setAnswer,
+    startTime,
+    toHours,
+  ]);
 
   return (
     <div className="quizzes-Question">
       <Chart>
         <Line points={fromPoints} />
 
-        {outcome !== undefined && <Line points={toPoints} />}
+        {selectedOutcome !== undefined && <Line points={toPoints} />}
       </Chart>
 
       <Grid
         fromHours={fromHours}
         toHours={toHours}
         zoom={zoom}
-        outcome={outcome}
-        setOutcome={setOutcome}
-        correct={correct}
+        outcome={selectedOutcome}
+        setOutcome={setSelectedOutcome}
+        correct={selectedOutcome === expectedOutcome}
       />
     </div>
   );

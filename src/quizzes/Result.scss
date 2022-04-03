@@ -1,0 +1,70 @@
+.quizzes-Result {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    margin: 0 0 0.7em 0;
+    color: #bf3612;
+  }
+
+  .table {
+    display: grid;
+    grid-template:
+      "header-label header-high header-middle header-low" auto
+      "high-name high-high high-middle high-low" auto
+      "middle-name middle-high middle-middle middle-low" auto
+      "low-name low-high low-middle low-low" auto
+      / auto auto auto auto auto;
+    grid-gap: 0.5em;
+    color: #183040;
+
+    .header-label {
+      grid-area: header-label;
+    }
+
+    $outcomes: "high", "middle", "low";
+
+    @each $outcome1 in $outcomes {
+      .header-#{$outcome1} {
+        grid-area: header-#{$outcome1};
+        min-width: 3em;
+        text-align: center;
+      }
+
+      .#{$outcome1}-name {
+        grid-area: #{$outcome1}-name;
+      }
+
+      .#{$outcome1}-value {
+        grid-area: #{$outcome1}-value;
+      }
+
+      @each $outcome2 in $outcomes {
+        .#{$outcome1}-#{$outcome2} {
+          grid-area: #{$outcome1}-#{$outcome2};
+          text-align: center;
+        }
+      }
+    }
+
+    .high-high.active,
+    .low-low.active {
+      color: #f24f09;
+    }
+  }
+
+  .cross {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+
+    svg {
+      width: 2em;
+      height: 2em;
+    }
+  }
+}

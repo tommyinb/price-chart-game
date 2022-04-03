@@ -17,14 +17,20 @@
     flex-direction: column;
     justify-content: space-between;
 
-    .zoom,
     .trash,
+    .zoom,
     .next {
       padding: 0.5em;
 
       svg {
         width: 2em;
         height: 2em;
+      }
+    }
+
+    .trash {
+      &:not(.active) {
+        visibility: hidden;
       }
     }
 

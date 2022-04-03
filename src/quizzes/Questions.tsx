@@ -1,4 +1,12 @@
-import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { loadHistory } from "../histories/storages/loadHistory";
+import { saveHistory } from "../histories/storages/saveHistory";
 import { Answer } from "./Answer";
 import { ReactComponent as Next } from "./next.svg";
 import { Question } from "./Question";
@@ -14,7 +22,7 @@ export function Questions({
 }: {
   count: number;
   answers: (Answer | undefined)[];
-  setAnswers: (answers: (Answer | undefined)[]) => void;
+  setAnswers: Dispatch<SetStateAction<(Answer | undefined)[]>>;
   complete: () => void;
 }) {
   const [zoom, setZoom] = useState(3);
@@ -27,11 +35,22 @@ export function Questions({
     }
   }, [complete, count, index]);
 
+  const setAnswer = useCallback(
+    (answer) => {
+      setAnswers((oldAnswers) => {
+        const newAnswers = [...oldAnswers];
+        newAnswers[index] = answer;
+        return newAnswers;
+      });
+    },
+    [index, setAnswers]
+  );
+
   return (
     <div className="quizzes-Questions">
       <div className="controls">
         <div
-          className="trash"
+          className={`trash ${answers[index] ? "active" : ""}`}
           onClick={() => {
             const newAnswers = [...answers];
             newAnswers[index] = undefined;
@@ -52,24 +71,23 @@ export function Questions({
           className="next"
           onClick={() => {
             setIndex(index + 1);
-            //TODO save answer to history
+
+            const answer = answers[index];
+            if (answer) {
+              const history = loadHistory(answer);
+
+              saveHistory({
+                ...history,
+                count: history.count + 1,
+              });
+            }
           }}
         >
           <Next />
         </div>
       </div>
 
-      {answers.length < count && (
-        <Question
-          key={index}
-          zoom={zoom}
-          setAnswer={(answer) => {
-            const newAnswers = [...answers];
-            newAnswers[index] = answer;
-            setAnswers(newAnswers);
-          }}
-        />
-      )}
+      <Question key={index} zoom={zoom} setAnswer={setAnswer} />
     </div>
   );
 }

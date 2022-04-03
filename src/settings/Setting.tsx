@@ -29,13 +29,28 @@ export function Setting() {
         <h1>Settings</h1>
 
         <div className="label">From Hours</div>
-        <Input value={displayFromHours} setValue={setDisplayFromHours} />
+        <Input
+          value={displayFromHours}
+          setValue={setDisplayFromHours}
+          minimum={2}
+          maximum={500}
+        />
 
         <div className="label">To Hours</div>
-        <Input value={displayToHours} setValue={setDisplayToHours} />
+        <Input
+          value={displayToHours}
+          setValue={setDisplayToHours}
+          minimum={2}
+          maximum={500}
+        />
 
         <div className="label">Questions</div>
-        <Input value={displayQuestions} setValue={setDisplayQuestions} />
+        <Input
+          value={displayQuestions}
+          setValue={setDisplayQuestions}
+          minimum={2}
+          maximum={100}
+        />
       </div>
 
       <div
