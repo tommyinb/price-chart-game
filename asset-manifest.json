@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/price-chart-game/static/css/main.bc0b7c65.css",
+    "main.js": "/price-chart-game/static/js/main.04b6e208.js",
+    "static/js/713.9bdd9676.chunk.js": "/price-chart-game/static/js/713.9bdd9676.chunk.js",
+    "static/js/418.842ec6fd.chunk.js": "/price-chart-game/static/js/418.842ec6fd.chunk.js",
+    "static/js/491.87026873.chunk.js": "/price-chart-game/static/js/491.87026873.chunk.js",
+    "static/js/146.11af95dc.chunk.js": "/price-chart-game/static/js/146.11af95dc.chunk.js",
+    "static/js/369.545c3f22.chunk.js": "/price-chart-game/static/js/369.545c3f22.chunk.js",
+    "static/js/924.278c6d93.chunk.js": "/price-chart-game/static/js/924.278c6d93.chunk.js",
+    "static/js/679.b6d4dee5.chunk.js": "/price-chart-game/static/js/679.b6d4dee5.chunk.js",
+    "static/js/565.b66396a0.chunk.js": "/price-chart-game/static/js/565.b66396a0.chunk.js",
+    "static/js/129.21c0c056.chunk.js": "/price-chart-game/static/js/129.21c0c056.chunk.js",
+    "static/js/462.fa6a8eb9.chunk.js": "/price-chart-game/static/js/462.fa6a8eb9.chunk.js",
+    "static/js/837.59f1b344.chunk.js": "/price-chart-game/static/js/837.59f1b344.chunk.js",
+    "static/js/877.9c16c9ed.chunk.js": "/price-chart-game/static/js/877.9c16c9ed.chunk.js",
+    "static/js/519.2bb16dd3.chunk.js": "/price-chart-game/static/js/519.2bb16dd3.chunk.js",
+    "static/js/861.b0d78d61.chunk.js": "/price-chart-game/static/js/861.b0d78d61.chunk.js",
+    "static/js/695.9742d4a5.chunk.js": "/price-chart-game/static/js/695.9742d4a5.chunk.js",
+    "static/js/203.b71057cf.chunk.js": "/price-chart-game/static/js/203.b71057cf.chunk.js",
+    "static/js/78.e0ed38a9.chunk.js": "/price-chart-game/static/js/78.e0ed38a9.chunk.js",
+    "static/js/180.4a01ee0f.chunk.js": "/price-chart-game/static/js/180.4a01ee0f.chunk.js",
+    "static/js/382.0c87e592.chunk.js": "/price-chart-game/static/js/382.0c87e592.chunk.js",
+    "static/js/379.e4ca9b4b.chunk.js": "/price-chart-game/static/js/379.e4ca9b4b.chunk.js",
+    "static/js/377.c1855308.chunk.js": "/price-chart-game/static/js/377.c1855308.chunk.js",
+    "service-worker.js": "/price-chart-game/service-worker.js",
+    "static/media/zoom.svg": "/price-chart-game/static/media/zoom.465767f83d2e2a8bc153c0d8dda07dd5.svg",
+    "index.html": "/price-chart-game/index.html",
+    "static/media/trash.svg": "/price-chart-game/static/media/trash.74a588267bb60970b9f96d5227da2dd2.svg",
+    "static/media/cross.svg": "/price-chart-game/static/media/cross.9f59d549f558e17adcef7f99e4abdea1.svg",
+    "static/media/next.svg": "/price-chart-game/static/media/next.f93f3edbc4511564df3796f2ea2423b9.svg",
+    "main.bc0b7c65.css.map": "/price-chart-game/static/css/main.bc0b7c65.css.map",
+    "main.04b6e208.js.map": "/price-chart-game/static/js/main.04b6e208.js.map",
+    "377.c1855308.chunk.js.map": "/price-chart-game/static/js/377.c1855308.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bc0b7c65.css",
+    "static/js/main.04b6e208.js"
+  ]
+}
