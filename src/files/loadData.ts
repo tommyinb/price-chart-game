@@ -1,47 +1,19 @@
-import all from "it-all";
-import { useEffect, useState } from "react";
-import { Item } from "./Item";
-
-export function useData(start: Date, end: Date) {
-  const [data, setData] = useState<Item[]>([]);
-
-  useEffect(() => {
-    const cancellation = { cancelled: false };
-
-    (async () => {
-      const data = await all(loadData(start, end));
-
-      if (cancellation.cancelled) {
-        return;
-      }
-
-      const filtered = data.filter(
-        (item) => item.time >= start && item.time <= end
-      );
-
-      setData(filtered);
-    })();
-
-    return () => {
-      cancellation.cancelled = true;
-    };
-  }, [start, end]);
-
-  return data;
-}
-
-async function* loadData(start: Date, end: Date) {
+export async function* loadData(start: Date, end: Date) {
   const yearMonths = getYearMonths(start, end);
 
   for (const yearMonth of yearMonths) {
     const load = await loadFile(yearMonth.year, yearMonth.month);
 
     for (const item of load.default) {
-      yield {
-        time: new Date(item.time),
-        price: item.price,
-        count: item.count,
-      };
+      const time = new Date(item.time);
+
+      if (time >= start && time <= end) {
+        yield {
+          time,
+          price: item.price,
+          count: item.count,
+        };
+      }
     }
   }
 }

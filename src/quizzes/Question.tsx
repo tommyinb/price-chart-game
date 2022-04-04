@@ -6,8 +6,7 @@ import { Answer } from "./Answer";
 import { Grid } from "./Grid";
 import { Outcome } from "./Outcome";
 import "./Question.scss";
-import { randomTime } from "./randomTime";
-import { useLoad } from "./useLoad";
+import { useData } from "./useData";
 
 export function Question({
   zoom,
@@ -18,51 +17,38 @@ export function Question({
 }) {
   const { fromHours, toHours } = useSetting();
 
-  const startTime = useMemo(
-    () => randomTime(fromHours + toHours),
-    [fromHours, toHours]
-  );
-
-  const { fromPoints, toPoints, outcomes } = useLoad(
-    startTime,
-    fromHours,
-    toHours,
-    zoom
-  );
+  const data = useData(fromHours, toHours, zoom);
 
   const [selectedOutcome, setSelectedOutcome] = useState<Outcome | undefined>();
 
-  const expectedOutcome = useMemo(
-    () => outcomes.find((o) => o !== Outcome.Middle) ?? Outcome.Middle,
-    [outcomes]
-  );
-
   useEffect(() => {
-    if (selectedOutcome) {
+    if (data && selectedOutcome) {
       setAnswer({
-        date: startTime,
+        date: data.startTime,
         fromHours,
         toHours,
-        expected: expectedOutcome,
+        expected: data.expectedOutcome,
         answered: selectedOutcome,
       });
     }
-  }, [
-    expectedOutcome,
-    fromHours,
-    selectedOutcome,
-    setAnswer,
-    startTime,
-    toHours,
-  ]);
+  }, [data, fromHours, selectedOutcome, setAnswer, toHours]);
+
+  const allPoints = useMemo(
+    () => (data ? [...data.fromPoints, ...data.toPoints] : []),
+    [data]
+  );
 
   return (
     <div className="quizzes-Question">
-      <Chart>
-        <Line points={fromPoints} />
-
-        {selectedOutcome !== undefined && <Line points={toPoints} />}
-      </Chart>
+      {data && (
+        <Chart>
+          {selectedOutcome ? (
+            <Line points={allPoints} />
+          ) : (
+            <Line points={data.fromPoints} />
+          )}
+        </Chart>
+      )}
 
       <Grid
         fromHours={fromHours}
@@ -70,7 +56,7 @@ export function Question({
         zoom={zoom}
         outcome={selectedOutcome}
         setOutcome={setSelectedOutcome}
-        correct={selectedOutcome === expectedOutcome}
+        correct={selectedOutcome === data?.expectedOutcome}
       />
     </div>
   );
