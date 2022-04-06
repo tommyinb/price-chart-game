@@ -1,62 +1,67 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Chart } from "../charts/Chart";
 import { Line } from "../charts/Line";
-import { useSetting } from "../settings/useSetting";
-import { Answer } from "./Answer";
+import { Point } from "../charts/Point";
 import { Grid } from "./Grid";
 import { Outcome } from "./Outcome";
 import "./Question.scss";
-import { useData } from "./useData";
 
 export function Question({
+  fromHours,
+  toHours,
+  fromPoints,
+  toPoints,
   zoom,
-  setAnswer,
+  expectedOutcome,
+  answeredOutcome,
+  setAnsweredOutcome,
 }: {
+  fromHours: number;
+  toHours: number;
+  fromPoints: Point[];
+  toPoints: Point[];
   zoom: number;
-  setAnswer: (answer: Answer) => void;
+  expectedOutcome: Outcome;
+  answeredOutcome: Outcome | undefined;
+  setAnsweredOutcome: (outcome: Outcome) => void;
 }) {
-  const { fromHours, toHours } = useSetting();
+  const { zoomedFromPoints, zoomedToPoints } = useMemo(() => {
+    const zoomedFromPoints = fromPoints.map((point) => ({
+      x: point.x,
+      y: (point.y - 0.5) * zoom + 0.5,
+    }));
 
-  const data = useData(fromHours, toHours, zoom);
+    const zoomedToPoints = toPoints.map((point) => ({
+      x: point.x,
+      y: (point.y - 0.5) * zoom + 0.5,
+    }));
 
-  const [selectedOutcome, setSelectedOutcome] = useState<Outcome | undefined>();
+    return { zoomedFromPoints, zoomedToPoints };
+  }, [fromPoints, toPoints, zoom]);
 
-  useEffect(() => {
-    if (data && selectedOutcome) {
-      setAnswer({
-        date: data.startTime,
-        fromHours,
-        toHours,
-        expected: data.expectedOutcome,
-        answered: selectedOutcome,
-      });
-    }
-  }, [data, fromHours, selectedOutcome, setAnswer, toHours]);
-
-  const allPoints = useMemo(
-    () => (data ? [...data.fromPoints, ...data.toPoints] : []),
-    [data]
+  const answerPoints = useMemo(
+    () => [
+      ...zoomedFromPoints.slice(zoomedFromPoints.length - 1),
+      ...zoomedToPoints,
+    ],
+    [zoomedFromPoints, zoomedToPoints]
   );
 
   return (
     <div className="quizzes-Question">
-      {data && (
-        <Chart>
-          {selectedOutcome ? (
-            <Line points={allPoints} />
-          ) : (
-            <Line points={data.fromPoints} />
-          )}
-        </Chart>
-      )}
+      <Chart>
+        <Line points={zoomedFromPoints} />
+
+        {answeredOutcome && <Line points={answerPoints} />}
+      </Chart>
 
       <Grid
         fromHours={fromHours}
         toHours={toHours}
         zoom={zoom}
-        outcome={selectedOutcome}
-        setOutcome={setSelectedOutcome}
-        correct={selectedOutcome === data?.expectedOutcome}
+        outcome={answeredOutcome}
+        setOutcome={setAnsweredOutcome}
+        correct={answeredOutcome === expectedOutcome}
       />
     </div>
   );

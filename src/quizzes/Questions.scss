@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: space-between;
 
+    .back,
     .trash,
     .zoom,
     .next {
@@ -28,7 +29,19 @@
       }
     }
 
+    .back {
+      &:not(.active) {
+        visibility: hidden;
+      }
+
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
     .trash {
+      opacity: 0.3;
+
       &:not(.active) {
         visibility: hidden;
       }
@@ -36,7 +49,7 @@
 
     .zoom {
       &:not(.active) {
-        opacity: 0.1;
+        opacity: 0.3;
       }
     }
   }

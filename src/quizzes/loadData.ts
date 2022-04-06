@@ -38,7 +38,7 @@ export async function loadData(
     }));
   }
 
-  const toOutcomes = toItems
+  const outcomes = toItems
     .map((item) => (item.price - middlePrice) / middlePrice)
     .map((change) =>
       change >= 0.05
@@ -48,13 +48,11 @@ export async function loadData(
         : Outcome.Middle
     );
 
-  const expectedOutcome =
-    toOutcomes.find((o) => o !== Outcome.Middle) ?? Outcome.Middle;
+  const outcome = outcomes.find((o) => o !== Outcome.Middle) ?? Outcome.Middle;
 
   return {
     fromPoints,
     toPoints,
-    toOutcomes,
-    expectedOutcome,
+    outcome,
   };
 }

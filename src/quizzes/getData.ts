@@ -14,8 +14,7 @@ export async function getData(
     const {
       fromPoints,
       toPoints,
-      toOutcomes,
-      expectedOutcome: dataOutcome,
+      outcome: dataOutcome,
     } = await loadData(startTime, fromHours, toHours);
 
     if (dataOutcome === expectedOutcome) {
@@ -23,7 +22,6 @@ export async function getData(
         startTime,
         fromPoints,
         toPoints,
-        toOutcomes,
       };
     }
   }
